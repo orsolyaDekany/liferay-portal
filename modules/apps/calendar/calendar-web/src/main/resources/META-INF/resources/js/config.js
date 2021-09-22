@@ -153,3 +153,23 @@
 		},
 	});
 })();
+
+(function () {
+	YUI.applyConfig({
+		groups: {
+			calendar: {
+				base: MODULE_PATH + '/js/',
+				modules: {
+					'liferay-calendar-base-override': {
+						path: 'calendar-base_override.js',
+						requires: [
+							'calendar-base',
+						],
+					},
+				},
+				root: MODULE_PATH + '/js/',
+			},
+		},
+	});
+})();
+
