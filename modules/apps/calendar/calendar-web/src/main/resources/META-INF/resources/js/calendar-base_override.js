@@ -12,23 +12,23 @@
  * details.
  */
 
- YUI.add(
+ AUI.add(
 	'liferay-calendar-base-override',
-	(Y) => {
+	(A) => {
         
 	var temp = document.createElement('DIV');
-	temp.innerHTML = Y.CalendarBase.HEADER_TEMPLATE;
+	temp.innerHTML = A.CalendarBase.HEADER_TEMPLATE;
 	var lastNode = temp.childNodes[temp.childNodes.length-1];
 	var lastNodeHTML = lastNode.innerHTML;
 	lastNodeHTML = lastNodeHTML.replace('aria-role="heading"','').replace('<div','<h1').replace('</div>','</h1>');
 
 	lastNode.innerHTML = lastNodeHTML;
     
-    Y.CalendarBase.HEADER_TEMPLATE = temp.innerHTML;
+    A.CalendarBase.HEADER_TEMPLATE = temp.innerHTML;
 
 	},
 	'', 
 	{
-		requires: ['calendar-base'],
+		requires: []
 	}
 );

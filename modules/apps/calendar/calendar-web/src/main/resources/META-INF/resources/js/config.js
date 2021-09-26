@@ -129,6 +129,7 @@
 							'liferay-scheduler-models',
 							'promise',
 							'resize-plugin',
+							'liferay-calendar-base-override'
 						],
 					},
 					'liferay-scheduler-event-recorder': {
@@ -147,23 +148,9 @@
 							'liferay-calendar-util',
 						],
 					},
-				},
-				root: MODULE_PATH + '/js/',
-			},
-		},
-	});
-})();
-
-(function () {
-	YUI.applyConfig({
-		groups: {
-			calendar: {
-				base: MODULE_PATH + '/js/',
-				modules: {
 					'liferay-calendar-base-override': {
 						path: 'calendar-base_override.js',
 						requires: [
-							'calendar-base',
 						],
 					},
 				},
@@ -172,4 +159,3 @@
 		},
 	});
 })();
-
