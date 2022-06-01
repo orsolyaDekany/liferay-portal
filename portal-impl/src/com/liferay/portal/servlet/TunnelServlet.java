@@ -117,28 +117,45 @@ public class TunnelServlet extends HttpServlet {
 		catch (InvocationTargetException invocationTargetException) {
 			_log.error(invocationTargetException);
 
-			Throwable throwable = invocationTargetException.getCause();
+			if (PropsValues.TUNNEL_SERVLET_HIDE_EXCEPTION_DATA) {
+				Throwable throwable = invocationTargetException.getCause();
 
 			if (throwable == null) {
 				returnObject = new SystemException();
 			}
 			else if (PropsValues.TUNNEL_SERVLET_HIDE_EXCEPTION_DATA) {
-				Class<?> clazz = throwable.getClass();
+					Class<?> clazz = throwable.getClass();
 
-				if (throwable instanceof PortalException) {
-					returnObject = new PortalException(
-						"Invocation failed due to " + clazz.getName());
+					if (throwable instanceof PortalException) {
+						returnObject = new PortalException(
+							"Invocation failed due to " + clazz.getName());
+					}
+					else {
+						returnObject = new SystemException(
+							"Invocation failed due to " + clazz.getName());
+					}
 				}
-				else {
-					returnObject = new SystemException(
-						"Invocation failed due to " + clazz.getName());
-				}
-			}
 			else if (throwable instanceof PortalException) {
 				returnObject = throwable;
 			}
-			else {
+				else {
 				returnObject = new SystemException(throwable.getMessage());
+				}
+			}
+			else {
+				returnObject = invocationTargetException.getCause();
+
+				if (!(returnObject instanceof PortalException)) {
+					if (returnObject != null) {
+						Throwable throwable = (Throwable)returnObject;
+
+						returnObject = new SystemException(
+							throwable.getMessage());
+					}
+					else {
+						returnObject = new SystemException();
+					}
+				}
 			}
 		}
 		catch (Exception exception) {
