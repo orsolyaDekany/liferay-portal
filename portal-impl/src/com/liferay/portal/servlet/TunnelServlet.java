@@ -139,10 +139,6 @@ public class TunnelServlet extends HttpServlet {
 			}
 				else {
 				returnObject = new SystemException(throwable.getMessage());
-				}
-			}
-			else {
-				if (throwable != null) {
 					if (throwable instanceof PortalException) {
 						returnObject = throwable;
 					}
@@ -151,9 +147,9 @@ public class TunnelServlet extends HttpServlet {
 							throwable.getMessage());
 					}
 				}
-				else {
-					returnObject = new SystemException();
-				}
+			}
+			else {
+				returnObject = new SystemException();
 			}
 		}
 		catch (Exception exception) {
